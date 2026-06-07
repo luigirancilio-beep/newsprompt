@@ -574,7 +574,8 @@ async function callClaude(systemPrompt, userContent, outputTextId, outputId, dot
       })
     });
     const data = await resp.json();
-    const text = data.content?.map(b => b.text || '').join('') || (lang === 'it' ? 'Errore nella risposta.' : 'Error in response.');
+    const text = data.content?.map(b => b.text || '').join('')
+      || (data.error ? 'Errore API: ' + data.error.message : (lang === 'it' ? 'Errore nella risposta.' : 'Error in response.'));
     textEl.textContent = text;
     label.textContent = 'Output';
     document.getElementById(dotId).classList.remove('live');
