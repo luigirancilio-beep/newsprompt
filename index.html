@@ -563,7 +563,7 @@ async function callClaude(systemPrompt, userContent, outputTextId, outputId, dot
   gtag('event', eventName, { language: lang });
 
   try {
-    const resp = await fetch('/api/claude', {
+   const resp = await fetch('https://newsprompt-production.up.railway.app/api/claude', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
