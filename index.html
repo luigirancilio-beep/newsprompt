@@ -563,9 +563,14 @@ async function callClaude(systemPrompt, userContent, outputTextId, outputId, dot
   gtag('event', eventName, { language: lang });
 
   try {
-    const resp = await fetch('/.netlify/functions/claude', {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': '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',
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
       body: JSON.stringify({
         model: 'claude-3-5-sonnet-20241022',
         max_tokens: 1000,
