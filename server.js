@@ -1,12 +1,17 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-
 app.use(express.json());
 
-app.post('/api/claude', async (req, res) => {
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  if (req.method === 'OPTIONS') return res.sendStatus(200);
+  next();
+});
+
+app.post('/api/claude', async (req, res) => {
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -25,7 +30,6 @@ app.post('/api/claude', async (req, res) => {
 });
 
 app.use(express.static(path.join(__dirname)));
-
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
