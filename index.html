@@ -32,18 +32,6 @@
     --radius-lg: 12px;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1a1a18;
-      --bg2: #242422;
-      --bg3: #2e2e2b;
-      --text: #f0efea;
-      --text2: #9b9b94;
-      --border: rgba(240,239,234,0.12);
-      --border2: rgba(240,239,234,0.22);
-      --border3: rgba(240,239,234,0.35);
-    }
-  }
 
   body {
     font-family: 'IBM Plex Sans', sans-serif;
@@ -563,11 +551,11 @@ async function callClaude(systemPrompt, userContent, outputTextId, outputId, dot
   gtag('event', eventName, { language: lang });
 
   try {
-   const resp = await fetch('https://newsprompt-production.up.railway.app/api/claude', {
+    const resp = await fetch('/api/claude', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-5',
+        model: 'claude-3-5-sonnet-20241022',
         max_tokens: 1000,
         system: systemPrompt,
         messages: [{ role: 'user', content: userContent }]
