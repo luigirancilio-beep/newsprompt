@@ -13,6 +13,7 @@ exports.handler = async function(event, context) {
 
   try {
     const body = event.body ? (event.isBase64Encoded ? Buffer.from(event.body, 'base64').toString() : event.body) : '{}';
+    console.log('Body received:', body);
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
